@@ -1,18 +1,17 @@
-const expross = require("express");
+const express = require("express");
 const contacts = require("../controllers/contact.controller");
-const { post } = require("../../app");
 
-const router = expross.Router();
+const router = express.Router();
 
-router.post("/");
+router.route("/")
     .get(contacts.findAll)
-    post(contacts.create);
-    .delete(contacts.deleteAll);
+    .post(contacts.create)
+    .delete (contacts.deleteAll);
 
-router.get("/favorite");
+router.route("/favorite")
     .get(contacts.findAllFavorite);
 
-router.get("/:id");
+router.route("/:id")
     .get(contacts.findOne)
     .put(contacts.update)
     .delete(contacts.delete);
