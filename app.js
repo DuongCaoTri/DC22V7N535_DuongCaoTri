@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const ApiError = require("./app/api-error");
 
 app.use(cors());
 app.use(express.json());
@@ -12,7 +13,6 @@ app.get('/', (req, res) => {
 const contactRouter = require("./app/routes/contact.route");
 app.use("/api/contacts", contactRouter);
 
-const ApiError = require("./api-error");
 
 // ....
 app.use("api/contacts", contactRouter);
@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 });
 
 // define error-handling middleware last, after other app.use() and routes calls
-app.use((err, req, res, next) => {
+app.use((error, req, res, next) => {
     // Middleware xử lý lỗi tập trung.
     // Trong các đoạn code xử lý ở các route, gọi next(error) sẽ chuyển về middleware xử lý lỗi này
     return res.status(error.statusCode || 500).json({
