@@ -11,11 +11,11 @@ app.get('/', (req, res) => {
 });
 
 const contactRouter = require("./app/routes/contact.route");
+const authRouter = require("./app/routes/auth.route");
+
 app.use("/api/contacts", contactRouter);
+app.use("/api/auth", authRouter);
 
-
-// ....
-app.use("api/contacts", contactRouter);
 // handle 404 response
 
 app.use((req, res, next) => {
